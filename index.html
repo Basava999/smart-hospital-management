@@ -20,21 +20,58 @@
                     <th>Address</th>
                 </tr>
             </thead>
-            <tbody>
-                {% for p in patients %}
-                <tr>
-                    <td>{{ p.patient_id }}</td>
-                    <td>{{ p.name }}</td>
-                    <td>{{ p.gender }}</td>
-                    <td>{{ p.age }}</td>
-                    <td>{{ p.phone }}</td>
-                    <td>{{ p.address }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        <a href="/" class="btn btn-secondary">Back</a>
-    </div>
-</body>
+            {% extends 'base.html' %}
 
-</html>
+            {% block content %}
+            <div class="header-section" style="text-align: center; margin-bottom: 3rem;">
+                <h1
+                    style="font-size: 3.5rem; font-weight: 700; margin-bottom: 1rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                    Welcome to MedFlow
+                </h1>
+                <p style="color: var(--text-muted); font-size: 1.2rem; max-width: 600px; margin: 0 auto;">
+                    Experience the future of hospital management. Streamlined, secure, and beautiful.
+                </p>
+            </div>
+
+            <div class="dashboard-grid"
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div class="card">
+                    <div class="icon-wrapper" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 1rem;">
+                        <i class="ri-user-heart-line"></i>
+                    </div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Patients</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Manage patient records, history, and
+                        details with ease.</p>
+                    <div style="display: flex; gap: 1rem;">
+                        <a href="/patients" class="btn">View All</a>
+                        <a href="/add_patient" class="btn btn-secondary"><i class="ri-add-line"></i> Add</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="icon-wrapper" style="font-size: 2.5rem; color: var(--secondary); margin-bottom: 1rem;">
+                        <i class="ri-stethoscope-line"></i>
+                    </div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Doctors</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Track medical staff, specializations,
+                        and availability.</p>
+                    <div style="display: flex; gap: 1rem;">
+                        <a href="/doctors" class="btn">View All</a>
+                        <a href="/add_doctor" class="btn btn-secondary"><i class="ri-add-line"></i> Add</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="icon-wrapper" style="font-size: 2.5rem; color: var(--success); margin-bottom: 1rem;">
+                        <i class="ri-calendar-check-line"></i>
+                    </div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Appointments</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Schedule and monitor appointments
+                        efficiently.</p>
+                    <div style="display: flex; gap: 1rem;">
+                        <a href="/appointments" class="btn">View All</a>
+                        <a href="/add_appointment" class="btn btn-secondary"><i class="ri-add-line"></i> Add</a>
+                    </div>
+                </div>
+            </div>
+            {% endblock %}

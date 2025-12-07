@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedFlow | Hospital Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Navigation -->
+        <nav class="navbar fade-in">
+            <a href="/" class="nav-brand">
+                <i class="ri-heart-pulse-line"></i> MedFlow
+            </a>
+            <div class="nav-links">
+                <a href="/" class="nav-link {{ 'active' if request.path == '/' else '' }}">Dashboard</a>
+                <a href="/patients" class="nav-link {{ 'active' if 'patient' in request.path else '' }}">Patients</a>
+                <a href="/doctors" class="nav-link {{ 'active' if 'doctor' in request.path else '' }}">Doctors</a>
+                <a href="/appointments" class="nav-link {{ 'active' if 'appointment' in request.path else '' }}">Appointments</a>
+            </div>
+        </nav>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages fade-in">
+                    {% for category, message in messages %}
+                        <div class="flash-message {{ category }}">
+                            <i class="ri-{{ 'checkbox-circle' if category == 'success' else 'error-warning' }}-line"></i>
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <!-- Main Content -->
+        <main class="fade-in">
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+</body>
+</html>

@@ -1,38 +1,47 @@
-<!DOCTYPE html>
-<html>
+{% extends 'base.html' %}
 
-<head>
-    <title>Doctors</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+{% block content %}
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+    <h1 style="font-size: 2rem;">Medical Staff</h1>
+    <a href="/add_doctor" class="btn"><i class="ri-nurse-line"></i> Add Doctor</a>
+</div>
 
-<body class="bg-light">
-    <div class="container mt-5">
-        <h2 class="mb-4">Doctors List</h2>
-        <table class="table table-bordered table-striped">
-            <thead class="table-dark">
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Specialization</th>
-                    <th>Phone</th>
-                    <th>Email</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for d in doctors %}
-                <tr>
-                    <td>{{ d.doctor_id }}</td>
-                    <td>{{ d.name }}</td>
-                    <td>{{ d.specialization }}</td>
-                    <td>{{ d.phone }}</td>
-                    <td>{{ d.email }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        <a href="/add_doctor" class="btn btn-primary">Add Doctor</a>
-    </div>
-</body>
-
-</html>
+<div class="card table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Doctor Name</th>
+                <th>Specialization</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for doctor in doctors %}
+            <tr>
+                <td>#{{ doctor.doctor_id }}</td>
+                <td style="font-weight: 500; color: var(--secondary);">Dr. {{ doctor.name }}</td>
+                <td>
+                    <span
+                        style="padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.8rem; background: rgba(236, 72, 153, 0.1); color: var(--secondary);">
+                        {{ doctor.specialization }}
+                    </span>
+                </td>
+                <td style="font-family: monospace;">{{ doctor.phone }}</td>
+                <td>{{ doctor.email }}</td>
+                <td><span style="color: var(--success); font-size: 0.8rem;">● Active</span></td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="6" style="text-align: center; padding: 3rem; color: var(--text-muted);">
+                    <i class="ri-stethoscope-line" style="font-size: 2rem; display: block; margin-bottom: 1rem;"></i>
+                    No doctors available. Hiring? Add one now!
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
